@@ -21,6 +21,7 @@ spec:
         kind: HelmRepository
         name: prometheus-community
   interval: 10m0s
+  releaseName: kube-prometheus-stack
   storageNamespace: default
   targetNamespace: default
   values:

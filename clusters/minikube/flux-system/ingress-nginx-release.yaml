@@ -21,5 +21,6 @@ spec:
         kind: HelmRepository
         name: ingress-nginx
   interval: 10m0s
+  releaseName: ingress-nginx
   storageNamespace: default
   targetNamespace: default
