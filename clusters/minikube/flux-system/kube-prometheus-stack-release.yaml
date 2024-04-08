@@ -20,10 +20,12 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: prometheus-community
+  install:
+    createNamespace: true
   interval: 10m0s
   releaseName: kube-prometheus-stack
-  storageNamespace: default
-  targetNamespace: default
+  storageNamespace: prometheus
+  targetNamespace: prometheus
   values:
     prometheus:
       prometheusSpec:
