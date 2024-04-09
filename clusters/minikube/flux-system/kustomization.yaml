@@ -4,5 +4,4 @@ resources:
 - gotk-components.yaml
 - gotk-sync.yaml
 - cloudnative-pg-release.yaml
-- ingress-nginx-release.yaml
 - kube-prometheus-stack-release.yaml
