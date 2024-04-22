@@ -1,0 +1,61 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: global-alertmanagerconfig
+  namespace: prometheus
+spec:
+  inhibitRules:
+  - equal:
+    - namespace
+    - alertname
+    sourceMatch:
+    - name: severity
+      value: critical
+    targetMatch:
+    - matchType: '=~'
+      name: severity
+      value: "warning|info"
+  - equal:
+    - namespace
+    - alertname
+    sourceMatch:
+    - name: severity
+      value: warning
+    targetMatch:
+    - name: severity
+      value: info
+  - equal:
+    - namespace
+    sourceMatch:
+    - name: alertname
+      value: InfoInhibitor
+    targetMatch:
+    - name: severity
+      value: info
+  receivers:
+  - name: "null"
+  - name: slack
+    slackConfigs:
+    - apiURL:
+        key: api-url
+        name: slack-notification-api-url
+      sendResolved: true
+      title: "{{ range .Alerts }}[{{ .Status | toUpper }}] {{ .Annotations.summary }}\n{{ end }}"
+      text: "{{ range .Alerts }}{{ .Annotations.description }}\nSeverity: {{ .Labels.severity }}\n{{ end }}"      
+  route:
+    groupBy:
+    - namespace
+    groupInterval: 5m
+    groupWait: 30s
+    receiver: "null"
+    repeatInterval: 12h
+    routes:
+    - matchers:
+      - matchType: '=~'
+        name: alertname
+        value: "InfoInhibitor|Watchdog"
+        receiver: "null"
+    - matchers:
+      - name: severity
+        value: critical
+      receiver: slack

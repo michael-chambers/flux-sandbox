@@ -30,7 +30,7 @@ spec:
     alertmanager:
       alertmanagerSpec:
         alertmanagerConfiguration:
-          name: test-alertmanagerconfig
+          name: global-alertmanagerconfig
     prometheus:
       prometheusSpec:
         podMonitorSelector: {}
