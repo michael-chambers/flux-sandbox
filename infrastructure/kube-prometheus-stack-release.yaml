@@ -16,7 +16,7 @@ spec:
   chart:
     spec:
       chart: kube-prometheus-stack
-      version: 58.x
+      version: 50.3.1
       sourceRef:
         kind: HelmRepository
         name: prometheus-community
@@ -27,6 +27,10 @@ spec:
   storageNamespace: prometheus
   targetNamespace: prometheus
   values:
+    alertmanager:
+      alertmanagerSpec:
+        alertmanagerConfiguration:
+          name: test-alertmanagerconfig
     prometheus:
       prometheusSpec:
         podMonitorSelector: {}
