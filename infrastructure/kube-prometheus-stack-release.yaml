@@ -27,10 +27,10 @@ spec:
   storageNamespace: prometheus
   targetNamespace: prometheus
   values:
-    alertmanager:
-      alertmanagerSpec:
-        alertmanagerConfiguration:
-          name: global-alertmanagerconfig
+    # alertmanager:
+    #   alertmanagerSpec:
+    #     alertmanagerConfiguration:
+    #       name: global-alertmanagerconfig
     prometheus:
       prometheusSpec:
         podMonitorSelector: {}
